@@ -6,23 +6,19 @@
 /*   By: sergio <sergio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 11:56:58 by sergio            #+#    #+#             */
-/*   Updated: 2025/07/09 11:34:20 by sergio           ###   ########.fr       */
+/*   Updated: 2025/07/09 12:21:14 by sergio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/contact.hpp"
 #include "../include/phonebook.hpp"
 
-PhoneBook::PhoneBook() : _count(0)
-{
-    std::cout << RED << "[DEBUG] Constructor de PhoneBook ejecutado\n" << RESET;
-}
+PhoneBook::PhoneBook() : _count(0) {}
 
-// Método que crea un nuevo contacto temporalmente (pero aún no se guarda en _list[])
 void PhoneBook::add()
 {
-    Contact newContact; // Aquí se llama al constructor de Contact (por defecto)
-    // Se piden al usuario los distintos campos del contacto
+    Contact newContact;
+
     newContact.setFirstName(completeContact("First Name: "));
     newContact.setLastName(completeContact("Last Name: "));
     newContact.setNickname(completeContact("Nickname: "));
@@ -32,28 +28,44 @@ void PhoneBook::add()
     int index = _count % 8;
     _list[index] = newContact;
     _count++;
-
-    // ! [DEBUG] Se imprime el contacto creado para ver que está bien
-    std::cout << RED << "[DEBUG] Contacto guardado en posición " << index << "\n" << RESET;
-    std::cout << RED << "[DEBUG] " << "Contacto creado con éxito. Datos almacenados:\n" << RESET;
-    newContact.displayFull();
-    // ! [DEBUG]
 }
 
 void PhoneBook::search()
 {
-    if (_count == 0)
-        std::cout << RED << "There are no saved contacts.\n" << RESET;
+    int total;
+    if (_count < 8)
+        total = _count;
     else
+        total = 8;
+    if (_count == 0) 
+    {
+        std::cout << RED << "There are no saved contacts.\n" << RESET;
+        return;
+    } 
+    else 
+    {
         std::cout << CYAN
-                << std::setw(10) << "|    Index" << "|"
+                << std::setw(10) << "Index" << "|"
                 << std::setw(10) << "First Name" << "|"
                 << std::setw(10) << "Last Name" << "|"
-                << std::setw(10) << "Nickname" << "|" << "\n"
+                << std::setw(10) << "Nickname" << "\n"
                 << RESET;
-    // 1 Funcion que muestre toda la lista de contactos guardados
-    // 2 Preguntar si se quiere acceder a un contacto en especifico para ver los detalles introduciendo un numero del 0 al 7
-    // 3 arbol de decision si se entra o no al flujo anterior
-    std::cout << RED << "[DEBUG] " << "Metodo SEARCH ejecutadpo con exito\n" << RESET;
+        for (int i = 0; i < total; ++i) {
+            const Contact& c = _list[i];
+            std::cout << std::setw(10) << i << "|"
+                    << std::setw(10) << formatField(c.getFirstName()) << "|"
+                    << std::setw(10) << formatField(c.getLastName()) << "|"
+                    << std::setw(10) << formatField(c.getNickname()) << "\n";
+        }
+    }
+    std::string input;
+    std::cout << GREEN << "Enter index (0 - 7): " << RESET;
+    std::getline(std::cin, input);
+    if (!std::cin) return; // Ctrl+D
+    if (input.length() != 1 || !isdigit(input[0]))
+        return;
+    int index = input[0] - '0';
+    if (index < 0 || index >= total)
+        return;
+    _list[index].displayFull();
 }
-

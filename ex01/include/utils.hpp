@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   phonebook.hpp                                      :+:      :+:    :+:   */
+/*   utils.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sergio <sergio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/09 10:11:00 by sergio            #+#    #+#             */
-/*   Updated: 2025/07/09 12:17:58 by sergio           ###   ########.fr       */
+/*   Created: 2025/07/09 12:11:16 by sergio            #+#    #+#             */
+/*   Updated: 2025/07/09 12:21:37 by sergio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHONEBOOK_HPP
-# define PHONEBOOK_HPP
+#ifndef UTILS_HPP
+# define UTILS_HPP
 
-# include "../include/utils.hpp"
-class PhoneBook
-{
-    private:
-        Contact _list[8];
-        int     _count;
+# include <iostream>
+# include <cctype>
+# include <limits>
+# include <iomanip>
+# include <string>
 
-    public:
-        PhoneBook();
-        void add();
-        void search();
-};
+# define RED "\033[31m"
+# define RESET "\033[0m"
+# define CYAN "\033[36m"
+# define MAGENTA "\033[35m"
+# define GREEN "\033[32m"
+
+std::string completeContact(std::string fieldName);
+void initPhoneBook();
+std::string formatField(const std::string &field);
 
 #endif

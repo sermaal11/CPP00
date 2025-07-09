@@ -6,58 +6,55 @@
 /*   By: sergio <sergio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 10:33:06 by sergio            #+#    #+#             */
-/*   Updated: 2025/07/09 11:34:42 by sergio           ###   ########.fr       */
+/*   Updated: 2025/07/09 12:18:51 by sergio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/contact.hpp"
 #include "../include/phonebook.hpp"
 
-// ! [DEBUG]
-// Método que imprime todos los campos del contacto (para comprobar que se guardó bien)
-void Contact::displayFull() const
-{
-    std::cout << "First Name: " << _firstName << std::endl;
-    std::cout << "Last Name: " << _lastName << std::endl;
-    std::cout << "Nickname: " << _nickname << std::endl;
-    std::cout << "Phone Number: " << _phoneNumber << std::endl;
-    std::cout << "Darkest Secret: " << _darkestSecret << std::endl;
-}
-
-// Punto de entrada del programa
 int main (int argc, char **argv)
 {
-    (void) argv; // Se ignora argv ya que no se usa
-    std::string input; // Variable para guardar el comando del usuario
-    // Se crea un objeto de tipo PhoneBook
-    // Aquí se llama automáticamente al constructor de PhoneBook
+    (void) argv;
+    std::string input;
     PhoneBook phoneBook;
-    // Si el programa se ejecuta sin argumentos adicionales (argc == 1)
+
     if (argc == 1)
     {
-        // Muestra las instrucciones iniciales
         initPhoneBook();
-        // Bucle infinito que espera comandos del usuario
-        while(1)
+
+        while (true)
         {
             std::cout << GREEN << "WAITING COMMAND:\n" << RESET;
-            // Lee el comando que introduce el usuario (una palabra)
             std::cin >> input;
-            // Ignora el resto de la línea para evitar conflictos con getline()
+
+            // Controlar EOF (Ctrl+D o Ctrl+Z)
+            if (!std::cin) {
+                std::cout << RED << "Input stream closed. Exiting...\n" << RESET;
+                break;
+            }
+
+            // Limpiar el resto del buffer
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            // Comando ADD → llama al método phoneBook.add()
+
+            // Convertir a mayúsculas (C++98 compatible)
+            for (size_t i = 0; i < input.length(); ++i)
+                input[i] = std::toupper(input[i]);
+
             if (input == "ADD")
                 phoneBook.add();
-            // Comando SEARCH → aún no implementado
             else if (input == "SEARCH")
                 phoneBook.search();
-            // Comando EXIT → sale del bucle y finaliza el programa
             else if (input == "EXIT")
                 break;
-            // Cualquier otro comando → mensaje de comando no válido
             else
                 std::cout << input << RED << " <-- COMMAND NOT ALLOWED\n" << RESET;
         }
     }
-    return (0); // Fin del programa
+    else
+    {
+        std::cout << RED << "This program does not accept arguments.\n" << RESET;
+    }
+
+    return 0;
 }
