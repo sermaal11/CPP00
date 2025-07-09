@@ -6,7 +6,7 @@
 /*   By: sergio <sergio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 10:11:00 by sergio            #+#    #+#             */
-/*   Updated: 2025/07/09 10:23:22 by sergio           ###   ########.fr       */
+/*   Updated: 2025/07/09 11:35:53 by sergio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <iostream>
 # include <cctype>
 # include <limits>
+# include <iomanip>
 
 class PhoneBook
 {
@@ -31,9 +32,10 @@ class PhoneBook
     public:
         PhoneBook();
         void add();
-        // void search( -??- )
+        void search();
 };
 
 std::string completeContact(std::string fieldName);
+void initPhoneBook();
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: sergio <sergio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 10:08:34 by sergio            #+#    #+#             */
-/*   Updated: 2025/07/09 10:09:57 by sergio           ###   ########.fr       */
+/*   Updated: 2025/07/09 11:27:45 by sergio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ class Contact
         void setNickname(const std::string str);
         void setPhoneNumber(const std::string str);
         void setDarkestSecret(const std::string str);
-        std::string getFirstName() {return _firstName;}
-        std::string getLasttName() {return _lastName;}
-        std::string getNickname() {return _nickname;}
-        std::string getPhoneNumber() {return _phoneNumber;}
-        std::string getDarkestSecret() {return _darkestSecret;}
+        std::string getFirstName() const;
+        std::string getLasttName() const;
+        std::string getNickname() const;
+        std::string getPhoneNumber() const;
+        std::string getDarkestSecret() const;
 
         // ! Testeo y DEBUG
         void displayFull() const; // <- Ver contenido del objeto contact

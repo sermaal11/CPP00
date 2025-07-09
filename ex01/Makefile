@@ -5,6 +5,7 @@ CFLAGS = -g3 -Wall -Wextra -Werror -std=c++98
 SRC =	    src/main.cpp \
 			src/contact.cpp \
 			src/phonebook.cpp \
+			src/utils.cpp \
 
 
 OBJS = $(notdir $(SRC:.cpp=.o))
