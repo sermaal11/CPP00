@@ -2,8 +2,8 @@ NAME = Account
 CC = g++
 CFLAGS = -g3 -Wall -Wextra -Werror -std=c++98
 
-SRC =		src/Account.cpp, \
-    		src/test.cpp \
+SRC =	src/tests.cpp \
+		src/Account.cpp \
 
 
 OBJS = $(notdir $(SRC:.cpp=.o))
