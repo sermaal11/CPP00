@@ -6,7 +6,7 @@
 /*   By: sergio <sergio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 02:36:31 by sergio            #+#    #+#             */
-/*   Updated: 2025/07/13 02:40:52 by sergio           ###   ########.fr       */
+/*   Updated: 2025/07/13 12:54:21 by sergio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,22 +38,22 @@ int main( void ) {
 	size_t const amounts_size = sizeof(amounts) / sizeof(int);
 	// Crear las cuentas iniciales con los valores anteriores
 	accounts_t accounts(amounts, amounts + amounts_size);
-	auto acc_begin = accounts.begin();
-	auto acc_end   = accounts.end();
+	accounts_t::iterator acc_begin = accounts.begin();
+	accounts_t::iterator acc_end   = accounts.end();
 
 	// Array con cantidades que se ingresarán a cada cuenta
 	int const d[] = { 5, 765, 564, 2, 87, 23, 9, 20 };
 	size_t const d_size = sizeof(d) / sizeof(int);
 	ints_t deposits(d, d + d_size);
-	auto dep_begin = deposits.begin();
-	auto dep_end   = deposits.end();
+	ints_t::iterator dep_begin = deposits.begin();
+	ints_t::iterator dep_end   = deposits.end();
 
 	// Array con cantidades que se intentarán retirar de cada cuenta
 	int const w[] = { 321, 34, 657, 4, 76, 275, 657, 7654 };
 	size_t const w_size = sizeof(w) / sizeof(int);
 	ints_t withdrawals(w, w + w_size);
-	auto wit_begin = withdrawals.begin();
-	auto wit_end   = withdrawals.end();
+	ints_t::iterator wit_begin = withdrawals.begin();
+	ints_t::iterator wit_end   = withdrawals.end();
 
 	// Mostrar información global de todas las cuentas
 	Account::displayAccountsInfos();
