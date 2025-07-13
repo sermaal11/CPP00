@@ -6,7 +6,7 @@
 /*   By: sergio <sergio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 20:22:06 by sergio            #+#    #+#             */
-/*   Updated: 2025/07/12 22:08:39 by sergio           ###   ########.fr       */
+/*   Updated: 2025/07/13 01:25:32 by sergio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,38 +29,39 @@
 
 class Account 
 {
-	public:
-		typedef Account		t;
-
-		static int	getNbAccounts( void );
-		static int	getTotalAmount( void );
-		static int	getNbDeposits( void );
-		static int	getNbWithdrawals( void );
-		static void	displayAccountsInfos( void );
-
-		Account( int initial_deposit );
-		~Account( void );
-
-		void	makeDeposit( int deposit );
-		bool	makeWithdrawal( int withdrawal );
-		int		checkAmount( void ) const;
-		void	displayStatus( void ) const;
-
 	private:
-		static int	_nbAccounts;
-		static int	_totalAmount;
-		static int	_totalNbDeposits;
-		static int	_totalNbWithdrawals;
+		static int	_nbAccounts;			// Total de cuentas creadas
+		static int	_totalAmount;			// Suma total de dinero en todas las cuentas
+		static int	_totalNbDeposits;		// Número total de depósitos globales
+		static int	_totalNbWithdrawals;	// Número total de retiradas globales
 
-		static void	_displayTimestamp( void );
+		static void	_displayTimestamp( void );	// Muestra un timestamp al imprimir logs
 
-		int			_accountIndex;
-		int			_amount;
-		int			_nbDeposits;
-		int			_nbWithdrawals;
+		int			_accountIndex;			// Índice único de esta cuenta
+		int			_amount;				// Saldo actual de la cuenta
+		int			_nbDeposits;			// Depósitos realizados en esta cuenta
+		int			_nbWithdrawals;			// Retiradas realizadas en esta cuenta
 
-	Account( void );
+		Account( void );					// Constructor por defecto (privado)
+
+	public:
+		typedef Account		t;				// Alias de tipo interno
+
+		static int	getNbAccounts( void );			// Devuelve el número total de cuentas
+		static int	getTotalAmount( void );			// Devuelve el total de dinero acumulado
+		static int	getNbDeposits( void );			// Devuelve el número total de depósitos
+		static int	getNbWithdrawals( void );		// Devuelve el número total de retiradas
+		static void	displayAccountsInfos( void );	// Imprime resumen global del sistema
+
+		Account( int initial_deposit );		// Constructor con depósito inicial
+		~Account( void );					// Destructor de la cuenta
+
+		void	makeDeposit( int deposit );			// Realiza un depósito y actualiza datos
+		bool	makeWithdrawal( int withdrawal );	// Intenta retirar dinero (true/false)
+		int		checkAmount( void ) const;			// Devuelve el saldo actual (sin modificar)
+		void	displayStatus( void ) const;		// Imprime estado de esta cuenta
 };
+
 
 // ************************************************************************** //
 // vim: set ts=4 sw=4 tw=80 noexpandtab:                                      //
